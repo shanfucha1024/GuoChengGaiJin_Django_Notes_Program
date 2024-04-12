@@ -44,7 +44,7 @@ class NewVisitorTest(unittest.TestCase):
         #页面中还有一个文本输入框，可以输入其他待办事项
         #他输入了“Send a gift to Lisi”
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
-        inputbox.send_keys('Send a gift to Lisi')
+        inputbox.send_keys('Give a gift to Lisi')
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
@@ -52,7 +52,7 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
         self.assertIn('1: Buy flowers', [row.text for row in rows])
-        # self.assertIn('2: Send a gift to Lisi', [row.text for row in rows])
+        self.assertIn('2: Give a gift to Lisi', [row.text for row in rows])
 
         #他想知道这个网站是否会记住他的待办事项
         #他看到网站为他生成了一个唯一的URL
