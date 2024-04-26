@@ -22,14 +22,6 @@ class ItemModelTest(TestCase):
 
 class HomePageTest(TestCase): 
 
-    def test_display_all_list_items(self):
-        Item.objects.create(text='itemey 1')
-        Item.objects.create(text='itemey 2')
-        response = self.client.get('/')
-
-        self.assertIn('itemey 1', response.content.decode())
-        self.assertIn('itemey 2', response.content.decode())
-
     def test_uses_home_template(self):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
@@ -44,7 +36,7 @@ class HomePageTest(TestCase):
     def test_redirects_after_POST(self):
         response = self.client.post('/', data={'item_text': 'A new list item'})
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/')
+        self.assertEqual(response['location'], '/lists/the-new-page/')
 
     def test_only_saves_items_when_necessary(self):
         self.client.get('/')
@@ -57,3 +49,9 @@ class HomePageTest(TestCase):
         self.assertTrue(html.startswith('<html>')) #(4)
         self.assertIn('<title>To-Do lists</title>', html) #(5)
         self.assertTrue(html.endswith('</html>')) #(6)
+
+class ListViewTest(TestCase):
+
+    def test_uses_list_template(self):
+            response = self.client.get('/lists/the-new-page/')
+            self.assertTemplateUsed(response, 'list.html')
