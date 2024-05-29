@@ -7,7 +7,7 @@ from selenium.common.exceptions import WebDriverException
 import os
 
 MAX_WAIT = 10
-os.environ["RAEL_SERVER"] = "121.40.193.133"
+# os.environ["RAEL_SERVER"] = "121.40.193.133"
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
