@@ -10,7 +10,7 @@ def view_list(request, list_id):
     return render(request, 'lists.html', {'list': list_user})
 
 def new_list(request):
-    list_user = List.objects.create() 
+    list_user = List.objects.create()
     Item.objects.create(text=request.POST['item_text'], list=list_user)
     return redirect(f'/lists/{list_user.id}/')
 
