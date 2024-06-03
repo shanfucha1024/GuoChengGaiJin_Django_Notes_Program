@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn server for 8.130.129.149
+
+[Service]
+Restart=on-failure
+User=Yang
+WorkingDirectory=/home/Yang/sites/8.130.129.149/source
+ExecStart=/home/Yang/sites/8.130.129.149/virtualenv/bin/gunicorn--bind unix:/tmp/8.130.129.149.socket HelloDjango.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
