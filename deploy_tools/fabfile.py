@@ -5,7 +5,7 @@ import random
 REPO_URL = 'https://github.com/shanfucha1024/GuoChengGaiJin_Django_Notes_Program.git'
 
 def deploy():
-    site_folder = f'/home/{env.user}/sites/{env.host}'
+    site_folder = f'/home/Yang/sites/{env.host}'
     source_folder = site_folder + '/source'
     _create_directory_structure_if_necessary(site_folder)
     _get_latest_source(source_folder)
@@ -44,7 +44,7 @@ def _update_settings(source_folder, site_name):
 def _update_virtualenv(source_folder):
     virtualenv_folder = source_folder + '/../virtualenv'
     if not exists(virtualenv_folder + '/bin/pip'):
-        run(f'python3 -m venv {virtualenv_folder}')
+        run(f'python3.9 -m venv {virtualenv_folder}')
     run(f'{virtualenv_folder}/bin/pip install -r {source_folder}/requirements.txt')
 
 def _update_static_files(source_folder):
@@ -55,7 +55,7 @@ def _update_static_files(source_folder):
  
 def _update_database(source_folder):
     # 生成迁移文件
-    # run(f'cd {source_folder} && ../virtualenv/bin/python manage.py makemigrations')
+    run(f'cd {source_folder} && ../virtualenv/bin/python manage.py makemigrations')
     run(
         f'cd {source_folder}'
         ' && ../virtualenv/bin/python manage.py migrate --noinput'
